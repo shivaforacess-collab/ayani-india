@@ -124,4 +124,105 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('current-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ===================== Gallery: filters + lightbox ===================== */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const masonryItems = document.querySelectorAll('.masonry-item');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filter;
+      masonryItems.forEach(item => {
+        const show = cat === 'all' || item.dataset.category === cat;
+        item.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    const lbImg = lightbox.querySelector('img');
+    const lbCaption = lightbox.querySelector('.lb-caption');
+    const visibleItems = () => Array.from(masonryItems).filter(i => i.style.display !== 'none');
+    let currentIndex = 0;
+
+    const openLightbox = (index) => {
+      const items = visibleItems();
+      currentIndex = index;
+      const img = items[currentIndex].querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCaption.textContent = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeLightbox = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
+    const showRelative = (delta) => {
+      const items = visibleItems();
+      currentIndex = (currentIndex + delta + items.length) % items.length;
+      const img = items[currentIndex].querySelector('img');
+      lbImg.src = img.src; lbImg.alt = img.alt; lbCaption.textContent = img.alt;
+    };
+
+    masonryItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const items = visibleItems();
+        const idx = items.indexOf(item);
+        openLightbox(idx === -1 ? 0 : idx);
+      });
+    });
+    lightbox.querySelector('.lb-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lb-nav.prev').addEventListener('click', () => showRelative(-1));
+    lightbox.querySelector('.lb-nav.next').addEventListener('click', () => showRelative(1));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showRelative(1);
+      if (e.key === 'ArrowLeft') showRelative(-1);
+    });
+  }
+
+  /* ===================== Contact form validation ===================== */
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    const validators = {
+      name: v => v.trim().length >= 2 || 'Please enter your name.',
+      email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'Please enter a valid email address.',
+      phone: v => v.trim() === '' || /^[0-9+\-\s()]{7,15}$/.test(v) || 'Please enter a valid phone number.',
+      message: v => v.trim().length >= 10 || 'Please enter at least 10 characters.'
+    };
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+      Object.keys(validators).forEach(name => {
+        const field = contactForm.elements[name];
+        if (!field) return;
+        const wrap = field.closest('.form-field');
+        const errEl = wrap.querySelector('.error-msg');
+        const result = validators[name](field.value);
+        if (result !== true) {
+          valid = false;
+          wrap.classList.add('invalid');
+          if (errEl) errEl.textContent = result;
+        } else {
+          wrap.classList.remove('invalid');
+          if (errEl) errEl.textContent = '';
+        }
+      });
+
+      if (!valid) return;
+
+      // NOTE (backend-ready): this is a static demo submission handler.
+      // Replace this block with a real submission call, e.g.:
+      // fetch('https://formspree.io/f/yourFormId', { method: 'POST', body: new FormData(contactForm), headers: { Accept: 'application/json' } })
+      const successEl = document.getElementById('form-success');
+      if (successEl) successEl.classList.add('show');
+      contactForm.reset();
+      setTimeout(() => successEl && successEl.classList.remove('show'), 6000);
+    });
+  }
+
 });
+
