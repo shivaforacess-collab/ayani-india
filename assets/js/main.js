@@ -124,64 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('current-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ===================== Gallery: filters + lightbox ===================== */
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const masonryItems = document.querySelectorAll('.masonry-item');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.filter;
-      masonryItems.forEach(item => {
-        const show = cat === 'all' || item.dataset.category === cat;
-        item.style.display = show ? '' : 'none';
-      });
-    });
-  });
-
-  const lightbox = document.getElementById('lightbox');
-  if (lightbox) {
-    const lbImg = lightbox.querySelector('img');
-    const lbCaption = lightbox.querySelector('.lb-caption');
-    const visibleItems = () => Array.from(masonryItems).filter(i => i.style.display !== 'none');
-    let currentIndex = 0;
-
-    const openLightbox = (index) => {
-      const items = visibleItems();
-      currentIndex = index;
-      const img = items[currentIndex].querySelector('img');
-      lbImg.src = img.src;
-      lbImg.alt = img.alt;
-      lbCaption.textContent = img.alt;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    };
-    const closeLightbox = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
-    const showRelative = (delta) => {
-      const items = visibleItems();
-      currentIndex = (currentIndex + delta + items.length) % items.length;
-      const img = items[currentIndex].querySelector('img');
-      lbImg.src = img.src; lbImg.alt = img.alt; lbCaption.textContent = img.alt;
-    };
-
-    masonryItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        const items = visibleItems();
-        const idx = items.indexOf(item);
-        openLightbox(idx === -1 ? 0 : idx);
-      });
-    });
-    lightbox.querySelector('.lb-close').addEventListener('click', closeLightbox);
-    lightbox.querySelector('.lb-nav.prev').addEventListener('click', () => showRelative(-1));
-    lightbox.querySelector('.lb-nav.next').addEventListener('click', () => showRelative(1));
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') showRelative(1);
-      if (e.key === 'ArrowLeft') showRelative(-1);
-    });
-  }
+  /* Gallery filters + lightbox now live in assets/js/gallery.js (dynamic, GitHub-folder-driven) */
 
   /* ===================== Contact form validation ===================== */
   const contactForm = document.getElementById('contact-form');
@@ -226,3 +169,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+// ===================== Careers application form =====================
+document.addEventListener('DOMContentLoaded', () => {
+  const careerForm = document.getElementById('career-form');
+  if (!careerForm) return;
+
+  const validators = {
+    name: v => v.trim().length >= 2 || 'Please enter your name.',
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'Please enter a valid email address.',
+    phone: v => /^[0-9+\-\s()]{7,15}$/.test(v) || 'Please enter a valid phone number.',
+    interest: v => v.trim() !== '' || 'Please select an area of interest.',
+    message: v => v.trim().length >= 10 || 'Tell us a little about yourself (10+ characters).'
+  };
+
+  careerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+    Object.keys(validators).forEach(name => {
+      const field = careerForm.elements[name];
+      if (!field) return;
+      const wrap = field.closest('.form-field');
+      const errEl = wrap.querySelector('.error-msg');
+      const result = validators[name](field.value);
+      if (result !== true) {
+        valid = false;
+        wrap.classList.add('invalid');
+        if (errEl) errEl.textContent = result;
+      } else {
+        wrap.classList.remove('invalid');
+        if (errEl) errEl.textContent = '';
+      }
+    });
+    if (!valid) return;
+
+    // Demo-mode storage (visible only in this browser's localStorage). Swap in
+    // a real backend (Formspree endpoint, or a PHP handler if hosted on a
+    // server that supports it) to actually receive applications remotely.
+    try {
+      const entry = {
+        name: careerForm.elements['name'].value,
+        email: careerForm.elements['email'].value,
+        phone: careerForm.elements['phone'].value,
+        interest: careerForm.elements['interest'].value,
+        message: careerForm.elements['message'].value,
+        submittedAt: new Date().toISOString()
+      };
+      const key = 'ayini_career_applications';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      existing.push(entry);
+      localStorage.setItem(key, JSON.stringify(existing));
+    } catch (err) { /* storage unavailable — fail silently */ }
+
+    const successEl = document.getElementById('career-form-success');
+    if (successEl) successEl.classList.add('show');
+    careerForm.reset();
+    setTimeout(() => successEl && successEl.classList.remove('show'), 7000);
+  });
+});

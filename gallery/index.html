@@ -36,6 +36,20 @@
 
 <div id="loader" aria-hidden="true"><div class="mark"></div></div>
 
+<div id="utility-bar">
+  <div class="container utility-inner">
+    <div class="utility-left">
+      <a href="tel:+919790809998"><i class="fa-solid fa-phone"></i>+91 97908 09998</a>
+      <span class="hide-mobile"><i class="fa-solid fa-envelope"></i>info@ayiniindia.com</span>
+      <span class="hide-mobile"><i class="fa-solid fa-clock"></i>Mon–Sat, 9:30 AM–6:30 PM IST</span>
+    </div>
+    <div class="utility-social">
+      <a href="https://www.linkedin.com/company/ayini-india-private-limited/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/popular/ayini-india-private-limited/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+</div>
+
 <header id="site-header">
   <div class="container header-inner">
     <a href="../index.html" class="logo-link" aria-label="AYINI India — Home">
@@ -45,9 +59,9 @@
       <a href="../index.html">Home</a>
       <a href="../pages/about.html">About Us</a>
       <a href="../index.html#services">Services</a>
-      <a href="../index.html#industries">Industries</a>
-      <a href="index.html" class="active">Gallery</a>
+      <a href="../pages/about.html#organisation">Leadership Corner</a>
       <a href="../pages/careers.html">Careers</a>
+      <a href="index.html" class="active">Gallery</a>
       <a href="../pages/contact.html">Contact</a>
     </nav>
     <div class="header-cta">
@@ -81,46 +95,22 @@
       <button class="filter-btn" data-filter="training">Training</button>
       <button class="filter-btn" data-filter="compliance">Compliance &amp; Audits</button>
       <button class="filter-btn" data-filter="stakeholders">Stakeholders</button>
+      <button class="filter-btn" data-filter="brand">Brand &amp; Marketing</button>
     </div>
 
-    <div class="masonry reveal">
-      <div class="masonry-item" data-category="rnd">
-        <img src="../assets/images/gallery/rnd-lab.jpg" alt="Laboratory sample testing for food safety research">
-        <div class="cap">Research &amp; Development — Laboratory Testing</div>
-      </div>
-      <div class="masonry-item" data-category="training">
-        <img src="../assets/images/gallery/training-session.jpg" alt="Food safety training session with industry professionals">
-        <div class="cap">Training — Industry Capacity Building</div>
-      </div>
-      <div class="masonry-item" data-category="compliance">
-        <img src="../assets/images/gallery/compliance-floor.jpg" alt="Compliance team reviewing data on the manufacturing floor">
-        <div class="cap">Integrated Food Compliance — Floor Audit</div>
-      </div>
-      <div class="masonry-item" data-category="stakeholders">
-        <img src="../assets/images/gallery/supplier-compliance.jpg" alt="Supplier compliance and legal audit engagement">
-        <div class="cap">Stakeholders — Supplier Audits</div>
-      </div>
-      <div class="masonry-item" data-category="stakeholders">
-        <img src="../assets/images/gallery/team-collaboration.jpg" alt="AYINI India team collaboration and planning session">
-        <div class="cap">Stakeholders — Staff Training &amp; Systems</div>
-      </div>
-      <div class="masonry-item" data-category="rnd">
-        <img src="../assets/images/gallery/rnd-lab.jpg" alt="Sample collection for shelf-life and sensory evaluation study">
-        <div class="cap">Research &amp; Development — Sample Collection</div>
-      </div>
-      <div class="masonry-item" data-category="training">
-        <img src="../assets/images/gallery/training-session.jpg" alt="Hygiene and safety training workshop">
-        <div class="cap">Training — Hygiene &amp; Safety Workshop</div>
-      </div>
-      <div class="masonry-item" data-category="compliance">
-        <img src="../assets/images/gallery/compliance-floor.jpg" alt="Onsite QHSE monitoring at a food production facility">
-        <div class="cap">Onsite QHSE — Production Monitoring</div>
-      </div>
-      <div class="masonry-item" data-category="stakeholders">
-        <img src="../assets/images/gallery/customer-trust.jpg" alt="Building customer trust through labelling and transparency">
-        <div class="cap">Stakeholders — Customer Trust &amp; Transparency</div>
-      </div>
+    <!-- Loading skeleton, shown while the gallery folder is being read -->
+    <div class="gallery-skeleton" id="gallery-skeleton">
+      <div class="sk-item"></div><div class="sk-item"></div><div class="sk-item"></div>
+      <div class="sk-item"></div><div class="sk-item"></div><div class="sk-item"></div>
     </div>
+
+    <!-- Populated automatically by assets/js/gallery.js from assets/images/gallery/ -->
+    <div class="gallery-grid" id="gallery-grid" style="display:none;"></div>
+
+    <p style="text-align:center;color:var(--grey-500);font-size:13px;margin-top:30px;">
+      <i class="fa-solid fa-circle-info"></i>&nbsp; This gallery updates automatically — new photos added to the
+      <code>assets/images/gallery/</code> folder in the repository appear here on the next page load.
+    </p>
 
   </div>
 </section>
@@ -201,9 +191,12 @@
   <button class="lb-nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
   <img src="" alt="">
   <button class="lb-nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+  <button class="lb-zoom in" aria-label="Zoom in"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+  <button class="lb-zoom out" aria-label="Zoom out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
   <div class="lb-caption"></div>
 </div>
 
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/gallery.js"></script>
 </body>
 </html>

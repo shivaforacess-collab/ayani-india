@@ -59,6 +59,21 @@
 <!-- Loading Screen -->
 <div id="loader" aria-hidden="true"><div class="mark"></div></div>
 
+<!-- Top Utility Bar -->
+<div id="utility-bar">
+  <div class="container utility-inner">
+    <div class="utility-left">
+      <a href="tel:+919790809998"><i class="fa-solid fa-phone"></i>+91 97908 09998</a>
+      <span class="hide-mobile"><i class="fa-solid fa-envelope"></i>info@ayiniindia.com</span>
+      <span class="hide-mobile"><i class="fa-solid fa-clock"></i>Mon–Sat, 9:30 AM–6:30 PM IST</span>
+    </div>
+    <div class="utility-social">
+      <a href="https://www.linkedin.com/company/ayini-india-private-limited/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/popular/ayini-india-private-limited/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+</div>
+
 <!-- Header -->
 <header id="site-header">
   <div class="container header-inner">
@@ -68,10 +83,38 @@
     <nav class="nav-desktop" aria-label="Primary">
       <a href="index.html" class="active">Home</a>
       <a href="pages/about.html">About Us</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#industries">Industries</a>
-      <a href="gallery/index.html">Gallery</a>
+      <div class="nav-item-mega">
+        <a href="index.html#services">Services <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="mega-panel">
+          <div class="mega-col">
+            <b>Research &amp; Development</b>
+            <a href="pages/services/research-development.html">New Product Development</a>
+            <a href="pages/services/research-development.html">Shelf-Life &amp; Sensory Study</a>
+            <a href="pages/services/research-development.html">Packaging &amp; Design</a>
+          </div>
+          <div class="mega-col">
+            <b>Training</b>
+            <a href="pages/services/training.html">FOSTAC &amp; Fire Safety</a>
+            <a href="pages/services/training.html">ISO 22000 / FSSC 22000</a>
+            <a href="pages/services/training.html">Occupational Health</a>
+          </div>
+          <div class="mega-col">
+            <b>Audits</b>
+            <a href="pages/services/auditing.html">GAP &amp; Hygiene Audits</a>
+            <a href="pages/services/operational-audit.html">Process &amp; GMP Audits</a>
+            <a href="pages/services/onsite-qhse.html">Onsite QHSE</a>
+          </div>
+          <div class="mega-col">
+            <b>Certification &amp; Advisory</b>
+            <a href="pages/services/fsms-advisory.html">FSSAI / ISO 22000</a>
+            <a href="pages/services/certifications.html">FSSC 22000 / BRC / SEDEX</a>
+            <a href="pages/careers.html">Careers &amp; Opportunities</a>
+          </div>
+        </div>
+      </div>
+      <a href="pages/about.html#organisation">Leadership Corner</a>
       <a href="pages/careers.html">Careers</a>
+      <a href="gallery/index.html">Gallery</a>
       <a href="pages/contact.html">Contact</a>
     </nav>
     <div class="header-cta">
@@ -89,26 +132,62 @@
 <section id="hero">
   <div class="hero-bg-shape one"></div>
   <div class="hero-bg-shape two"></div>
-  <div class="container hero-grid">
-    <div class="hero-copy">
+  <div class="container">
+    <div class="hero-copy" style="max-width:720px;margin-bottom:40px;">
       <span class="eyebrow">Sustainable Food Engineering · Est. 2025</span>
       <h1>Engineering Trust Into Every Link of the <span class="accent">Food Chain</span></h1>
       <p class="lead justified">AYINI India partners with food businesses to safeguard public health, simplify regulatory compliance, and build a culture of safety, quality and accountability — from farm to fork. We don't just meet standards, we raise them.</p>
-      <div class="hero-actions">
-        <a href="#services" class="btn btn-primary">Explore Our Services <i class="fa-solid fa-arrow-right"></i></a>
-        <a href="pages/contact.html" class="btn btn-outline">Talk to Our Experts</a>
+    </div>
+
+    <div class="hero3-grid">
+      <div class="hero3-card">
+        <img src="assets/images/content/rnd-lab.jpg" alt="Laboratory research and food safety testing">
+        <span class="h3-label">Research &amp; Development</span>
+        <a href="pages/contact.html" class="btn btn-gold">Enquire Now</a>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><b data-count="30" data-suffix="+">0</b><span>Years Cumulative Team Experience</span></div>
-        <div class="hero-stat"><b data-count="18" data-suffix="+">0</b><span>Food Industry Sectors Served</span></div>
-        <div class="hero-stat"><b data-count="9" data-suffix="+">0</b><span>Certification Standards Supported</span></div>
+      <div class="hero3-card">
+        <img src="assets/images/gallery/customer-trust.jpg" alt="Food inspection and label compliance review">
+        <span class="h3-label">Audits &amp; Compliance</span>
+        <a href="pages/contact.html" class="btn btn-gold">Enquire Now</a>
+      </div>
+      <div class="hero3-card">
+        <img src="assets/images/content/training.jpg" alt="Food safety training classroom session">
+        <span class="h3-label">Training &amp; Certification</span>
+        <a href="pages/contact.html" class="btn btn-gold">Enquire Now</a>
       </div>
     </div>
-    <div class="hero-visual reveal">
-      <img src="assets/images/content/compliance-floor.jpg" alt="Food manufacturing team reviewing compliance data on the production floor">
-      <div class="hero-badge">
-        <i class="fa-solid fa-shield-halved" style="color:var(--gold-500);font-size:26px;"></i>
-        <div><b>Zero Risk,</b><span>Full Compliance Ecosystem</span></div>
+
+    <div class="hero-stats" style="margin-top:44px;">
+      <div class="hero-stat"><b data-count="30" data-suffix="+">0</b><span>Years Cumulative Team Experience</span></div>
+      <div class="hero-stat"><b data-count="18" data-suffix="+">0</b><span>Food Industry Sectors Served</span></div>
+      <div class="hero-stat"><b data-count="9" data-suffix="+">0</b><span>Certification Standards Supported</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT US SNAPSHOT (wireframe-style checklist stats) -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center;gap:56px;">
+      <div class="reveal">
+        <span class="eyebrow">About Us</span>
+        <h2 style="font-size:clamp(24px,3vw,32px);margin:10px 0 16px;">What Sets Us Apart</h2>
+        <ul class="check-stats">
+          <li><i class="fa-solid fa-circle-check"></i>30+ Years of Combined Team Industry Experience</li>
+          <li><i class="fa-solid fa-circle-check"></i>Advisory Across FSSC 22000, ISO 22000 &amp; Quality Management Systems</li>
+          <li><i class="fa-solid fa-circle-check"></i>Three Integrated Arms — R&amp;D, Training &amp; Food Compliance</li>
+          <li><i class="fa-solid fa-circle-check"></i>18+ Food Industry Sectors Served Across India</li>
+          <li><i class="fa-solid fa-circle-check"></i>Hands-On, On-Premise Delivery — Not Remote Advisory</li>
+        </ul>
+        <a href="pages/about.html" class="btn btn-outline">More About Us <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="reveal">
+        <div class="grid grid-2 reveal-stagger" style="gap:18px;">
+          <div class="card icon-card"><div class="icon-wrap"><i class="fa-solid fa-magnifying-glass-chart"></i></div><h3 style="font-size:16px;">Deep Industry Experience</h3><p style="font-size:13px;">Grounded in 30+ years of pooled, hands-on food safety practice.</p></div>
+          <div class="card icon-card"><div class="icon-wrap"><i class="fa-solid fa-user-tie"></i></div><h3 style="font-size:16px;">Consulting Expertise</h3><p style="font-size:13px;">Advisory built for practical, everyday implementation, not paperwork.</p></div>
+          <div class="card icon-card"><div class="icon-wrap"><i class="fa-solid fa-bolt"></i></div><h3 style="font-size:16px;">Rapid Value Creation</h3><p style="font-size:13px;">We address the critical issues that matter to your business first.</p></div>
+          <div class="card icon-card"><div class="icon-wrap"><i class="fa-solid fa-diagram-project"></i></div><h3 style="font-size:16px;">Technology Driven</h3><p style="font-size:13px;">Digital checklists, IoT monitoring and AI-driven formulation tools.</p></div>
+        </div>
       </div>
     </div>
   </div>
